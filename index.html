@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <title>Найди пару</title>
+    <link href="style/pareCSS.css" rel="stylesheet">
+    <script type = 'text/javascript', src = 'js/pareEngine.js'></script>
+</head>
+<body>
+    <div id='menu' class='menu'>
+    	<div class = 'header'>Найди пару</div>
+        <div class='form'>
+            <div id='newLevel' class='button'>Новая&nbsp;игра</div>
+            <div id='contin' class='button'>Продолжить</div>
+            <div id='exit' class='button'>Выход</div>
+        </div>
+    </div>
+    <div id='nextL' class='nextLevel'>
+    	<div id = 'text'>Поздравляю! Попыток:&nbsp;</div>
+        <div class='form'>
+            <div id='repeat' class='button'>Повторить</div>
+            <div id='next' class='button'>Продолжить</div>
+        </div>
+    </div>
+    <input type="checkbox" id="hmt" class="check">
+    <label class="cross" for="hmt">&equiv;</label>
+    <div class='btn-menu'>
+        <div class='form'>
+            <div id ='gomenu' class='button'>Меню</div>
+            <div id='restart' class='button'>Заново</div>
+            <div id='exit2' class='button'>Выход</div>
+        </div>
+    </div>
+<script type="text/javascript">
+    var lev1;
+    var lev;
+    var menu = document.getElementById('menu');
+    var newLevel = document.getElementById('newLevel');
+    newLevel.onclick=newLevel.ontouchstart=function(e){
+    	e.preventDefault();
+    	if (lev1) {
+            lev1.removeLev();
+        }
+        startLev(1);
+        menu.style.display='none';
+    };
+    var contin = document.getElementById('contin');
+    if (window.localStorage&&localStorage.lev){
+    	lev=+localStorage.lev;
+        contin.onclick=contin.ontouchstart=function(e){
+            e.preventDefault();
+            if (lev1===undefined)
+                startLev(lev);
+            menu.style.display='none';
+        };
+    }
+    else
+        contin.style.background='grey';
+    var exit = document.getElementById('exit');
+    var nextL = document.getElementById("nextL");
+    var text = document.getElementById("text");
+    var rep = document.getElementById("repeat");
+    var next = document.getElementById("next");
+    next.onclick=next.ontouchstart=function(e){
+        e.preventDefault();
+       	if (lev1.lev==cntLev)
+            lev=lev1.randLev;
+        else
+            lev=lev1.lev+1;
+        lev1.removeLev();
+        startLev(lev);
+        nextL.style.display='none';
+    };
+    var hmt= document.getElementById('hmt');
+    hmt.onchange=function(){
+        if (lev1.start&&lev1.pause==0)
+            lev1.pause=Date.now();
+        }
+    var gomenu = document.getElementById('gomenu');
+    gomenu.onclick=gomenu.ontouchstart=function(e){
+        e.preventDefault();
+    	hmt.checked=false;
+        menu.style.display='block';
+    }
+    var rep2= document.getElementById('restart');
+    rep.onclick=rep2.onclick=rep.ontouchstart=rep2.ontouchstart=function(e){
+    	e.preventDefault();
+    	hmt.checked=false;
+       	lev1.removeLev();
+        startLev(lev1.lev);
+        nextL.style.display='none';
+    };
+    var exit2 = document.getElementById('exit2');
+    exit.onclick=exit2.onclick=exit.ontouchstart=exit2.ontouchstart=function(e){
+    	e.preventDefault();
+        window.close();
+    };
+    function startLev(lev){
+        lev1=new Level({
+            lev:lev
+        });
+        lev1.draw();
+    }
+    function timeMS(t){
+        var m=Math.floor(t/60);
+        var s=t%60;
+        return m+':'+(s<10?(''+0+s):s);
+    }
+
+    window.onresize=function(){
+        if(lev1) lev1.resize();
+    };
+//8
+    var map11=[
+           [7,0,7],
+             [0],
+        [8,0,0,0,8],
+        [8,7.5,7.5,8],
+             [0]
+    ];
+//12
+    var map12=[
+         [3.5,1,1,3.5],
+        [0.5,0,0,0,0.5],
+        [0.5,0,0,0,0.5],
+         [3.5,0,0,3.5],
+             [1,1]
+    ];
+//14
+    var map13=[
+  [3,3,3,0,0,0,0,0,0],
+       [3,0,0,0],
+        [0,0,0,3,0,0,0,0,3],
+         [0,0,0,3,0,0,0,3],
+          [0,0,0,3,3,3,3],
+        [0,0,0,2.5,0,0,0,2.5],
+              [0]
+    ];
+//14
+    var map14=[
+            [4],
+        [0,4,4,0],
+        [4,0,0,4],
+        [4,0,0,0],
+        [0,4,4,0],
+        [0,0,0,4],
+        [4,0,0,4],
+        [0,4,4,0],
+           [4]
+    ];
+//16
+    var map15=[
+        [0,0.5,0.5,0],
+        [0,1,0,0,1,0],
+      [0,1,0,0,0.5,1,0],
+      [0,1,0.5,1,0,0,0],
+       [0,1,0,0,0,0,0],
+     [0,1,0.5,0.5,0.5,1],
+            [0,0]
+    ];
+//20
+    var map21=[
+        [5,5,5,5,5,5],
+        [5,0,0,0,0,5],
+        [5,0,0,0,0,5],
+        [5,5,5,5,5,5],
+          [5,0,0,5],
+          [5,0,0,5]
+    ];
+//26
+    var map22=[
+        [1,1,0,1,1],
+        [1,1,0,1,1],
+        [1,1,1,1,1],
+        [1,1,1,1,1],
+        [1,1,0,1,1],
+        [1,1,0,1,1]
+    ];
+//26
+    var map23=[
+        [1,0,1,1,1,0,1,1,1],
+        [1,0,0,0,1,0,0,0,1],
+        [1,0,1,1,1,0,0,1,1],
+        [1,0,1,0,0,0,0,0,1],
+        [1,0,1,1,1,0,1,1,1]
+    ];
+//28
+    var map24=[
+       [0,0,3,3,3,3,3,3,3,3,3],
+        [0,0,3,3,3,3,3,3,3,3],
+           [3,3,3,3,0,0,0],
+          [3,3,0,3,0,0,0,0],
+         [3,3,0,0,0,0,0,0,0],
+        [3,3,0,0,0,0,0,0,0,0]
+    ];
+//28
+    var map25=[
+        [1,1,1,0,0,1,0,1,0,0,1,0,1],
+        [0,1,0,0,1,1,1,1,1,0,1,0,1],
+        [0,1,0,0,0,1,1,1,0,0,1,0,1],
+        [1,1,1,0,0,0,1,0,0,0,1,1,1]
+    ];
+//32
+    var map31=[
+                [1],
+           [0,0,1,1,0,0],
+         [1,1,1,1,1,1,1,1],
+         [0,1,1,1,1,1,1,0],
+         [0,0,1,1,1,1,0,0],
+            [1,1,1,1,1],
+         [0,1,1,0,0,1,1,0],
+          [1,0,0,0,0,0,1]
+    ];
+//32
+    var map32=[
+        [0,1,1,0,0,0,1,1,0],
+        [1,1,1,1,0,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1],
+        [0,1,1,1,1,1,1,1,0],
+        [0,0,0,1,1,1,0,0,0],
+        [0,0,0,0,1,0,0,0,0]
+    ];
+//34
+    var map33=[
+          [0,3,3,3,3,3,0],
+          [3,3,3,3,3,3,3],
+         [3,0,0,3,3,0,0,3],
+        [3,2.5,3,3,3,2.5,3],
+           [2.5,3,3,2.5],
+           [2.5,0,0,2.5],
+           [2.5,0,0,2.5],
+            [2.5,0,2.5],
+                [3]
+    ];
+//38
+    var map34=[
+        [1,1,0,0,1,1,0,1,1,0,1,1,0],
+        [1,0,1,0,1,0,0,1,0,0,1,0,1],
+        [1,1,0,0,1,1,0,1,1,0,1,1,0],
+        [1,0,1,0,1,0,0,1,0,0,1,0,1],
+        [1,1,0,0,1,1,0,1,1,0,1,0,1]
+    ];
+//40
+    var map35=[
+      [0,0,1,1,0,0.5],
+      [0,0,1,1,0,0],
+          [1,1],
+          [1,1],
+         [1,1,1],
+        [1,1,1,1],
+        [1,1,1,1],
+        [1,1,1,1],
+        [1,1,1,1],
+        [1,1,1,1],
+        [1,1,1,1],
+        [1,1,1,1],
+    ];
+    var map=[
+        map11,map12,map13,map14,map15,
+        map21,map22,map23,map24,map25,
+        map31,map32,map33,map34,map35
+    ];
+    var cntLev=map.length;
+    var name=[
+        'смайлик','круг','тележка','доллар','е',
+        'экран','Н','123','пистолет','IvU',
+        'звезда','сердце','крик','beer','бутылка'
+    ];
+    var photo1=[
+        [],
+        ['url(img/Бутылка.png) no-repeat center','70%'],
+        ['url(img/1864.jpg) no-repeat center 18%','70%'],
+        ['url(img/HeiCan.png) no-repeat 76% 20%','38%']
+    ];
+    var photo=[
+        '',1,3,'','',
+        2,'','','','',
+        '','','','',''
+    ];
+    var bg1=['photo','bottle'];
+    var bg=[
+        1,0,1,0,1,
+        0,1,0,1,0,
+        0,0,1,1,0
+    ];
+    var count1=[
+        [0,10],[0,20],[10,20],[0,27],[20,36]
+    ];
+    var count=[
+        [4,0],[6,3],[7,2],[7,3],[8,2],
+        [10,3],[13,1],[13,3],[14,1],[14,3],
+        [16,3],[16,3],[17,1],[18,1],[20,3]
+    ];
+    var diff=[
+        'легкий','легкий','легкий','легкий','легкий',
+        'средний','средний','средний','средний','средний',
+        'сложный','сложный','сложный','сложный','сложный'
+    ];
+    var ang=[
+        'rd','rd','sq','rd','rd',
+        'sq','rd','sq','sq','sq',
+        'rd','rd','sq','rd','rd'
+    ];
+</script>
+</body>
+</html>
