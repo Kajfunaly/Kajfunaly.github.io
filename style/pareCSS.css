@@ -249,10 +249,10 @@
             transition: background-position 0.2s step-end;
         }
         .photo{
-            background: url(img/BB_sprites_ph2.png) no-repeat;
+            background: url(../img/BB_sprites_ph2.png) no-repeat;
         }
         .bottle{
-            background: url(img/BB_sprites2.png) no-repeat;
+            background: url(../img/BB_sprites2.png) no-repeat;
         }
         .sq{
             border-radius: 7px;
