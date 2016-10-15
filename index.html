@@ -97,18 +97,6 @@
     	e.preventDefault();
         window.close();
     };
-    function startLev(lev){
-        lev1=new Level({
-            lev:lev
-        });
-        lev1.draw();
-    }
-    function timeMS(t){
-        var m=Math.floor(t/60);
-        var s=t%60;
-        return m+':'+(s<10?(''+0+s):s);
-    }
-
     window.onresize=function(){
         if(lev1) lev1.resize();
     };
