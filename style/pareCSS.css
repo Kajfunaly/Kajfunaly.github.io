@@ -338,12 +338,4 @@
             animation-delay:2s;
             animation-fill-mode: forwards;
             cursor:default;
-        }-moz-animation-fill-mode: forwards;
-            -o-animation: load 6s steps(6, end);
-            -o-animation-delay:2s;
-            -o-animation-fill-mode: forwards;
-            animation: load 6s steps(6, end);
-            animation-delay:2s;
-            animation-fill-mode: forwards;
-            cursor:default;
         }
