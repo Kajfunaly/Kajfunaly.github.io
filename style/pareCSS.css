@@ -339,10 +339,8 @@
             animation-fill-mode: forwards;
             cursor:default;
         }
-#preloadedImages {
+.preloadedImages {
         width: 0px;
         height: 0px;
         display: inline;
-        background-image: url(../img/BB_sprites2.png);
-        background-image: url(../img/BB_sprites_ph2.png);
  }
