@@ -31,6 +31,17 @@ function getWH(){
             setTimeout(draw,duration);
         }
     };
+    function startLev(lev){
+        lev1=new Level({
+            lev:lev
+        });
+        lev1.draw();
+    }
+    function timeMS(t){
+        var m=Math.floor(t/60);
+        var s=t%60;
+        return m+':'+(s<10?(''+0+s):s);
+    }
     function Level(ob){
         var o=this;
         var q=2;
