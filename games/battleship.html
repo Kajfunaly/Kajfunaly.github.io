@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <title>Морской бой</title>
+    <link rel='icon' sizes="16x16 32x32" href = 'img/battleshipicon.png' type='images/png'>
+    <link href="style/battleshipCSS.css" rel="stylesheet">
+    <script type = 'text/javascript', src = 'js/battleshipEngine.js'></script>
+</head>
+<body id='body'>
+    <span class='invis'>8)</span>
+    <input type="checkbox" id="hmt" class="check">
+    <label id ='cross' class="cross" for="hmt">
+        <div class='cross1'></div>
+        <div class='cross3'></div>
+        <div id='cross2' class='cross2'>
+            <div class='menu'>
+                <div class='newLevel' onclick='newGame()'>Новая игра</div>
+                <div class='newLevel' onclick="return location=href='index.html'">Выход</div>
+            </div>
+        </div>
+    </label>
+<script type="text/javascript">
+var hmt= document.getElementById('hmt');
+var cross= document.getElementById('cross');
+//cross.ontouchstart= function(e) {
+//    e.preventDefault();
+//    hmt.checked=!hmt.checked;
+//};
+var cons = document.createElement("div");
+cons.classList.add('cons');
+var consPage=document.createElement("div");
+var consT=document.createElement("div");
+var ok = document.createElement("div");
+ok.innerHTML='OK';
+ok.classList.add('ok');
+ok.onclick=function(){
+cons.classList.remove('visible');
+};
+consPage.appendChild(consT);
+consPage.classList.add('consPage');
+consPage.appendChild(ok);
+cons.appendChild(consPage);
+document.body.appendChild(cons);
+var body = document.getElementById('body');
+var ts = 10;
+var amt=10;
+var len = [4,3,3,2,2,2,1,1,1,1];
+var px=2;
+var py=2;
+var wc=getWC();
+var fleetsArr = drawFleetsArr();
+var myFleet;
+var fleet1=enemyFleet=new Fleet(ts,fleetsArr,len,'флот противника');
+var fleet2=myFleet=new Fleet(ts,fleetsArr,len,'мой флот');
+fleet2.fleetArr.classList.add('myFleet');
+var buttons=drawButtons(fleetsArr);
+
+
+</script>
+</body>
+</html>
