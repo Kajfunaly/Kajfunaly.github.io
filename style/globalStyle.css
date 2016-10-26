@@ -36,6 +36,14 @@ hr {
 }
 iframe, object, embed {max-width: 100%;}
 .clr {clear:both;}
+.clrfix:after {
+    content:".";
+    clear:both;
+    display:block;
+    height:0;
+    font-size:0;
+    visibility:hidden
+}
 .wrapper {
     margin:0 auto;
     padding:0 10px;
@@ -152,7 +160,9 @@ iframe, object, embed {max-width: 100%;}
     background:#fff;
     margin:2px 0 0;
 }
-#footer {padding:40px 0;}
+#footer {
+    padding:40px 0;
+}
 .foot {
     float: left;
     width:100%;
@@ -344,19 +354,3 @@ width:100%;
 @media only screen and (min-width: 961px){
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
