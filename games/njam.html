@@ -33,21 +33,24 @@
 		-moz-box-sizing:border-box;
     	-webkit-box-sizing:border-box;
     	box-sizing:border-box;
-	}
-	.cross a{
-		color:white;
+    	color:white;
 		font-family: Arial, Helvetica, sans-serif;
 		font-size:22px;
 		line-height: 0.95em;
-		text-decoration:none;
 	}
 	.cross:hover{
 		opacity:1;
 		cursor:pointer;
 	}
  </style>
- <div class='cross'><a href='index.html'> &times </a></div>
 	<script type="text/javascript">
+		var cross=document.createElement('div');
+		cross.innerHTML='&times';
+		cross.classList.add('cross');
+		document.body.appendChild(cross);
+		cross.onclick=cross.ontouchstart=function(){
+			return location=href='index.html'
+		};
 		var js = new PointJS('2d',400,300,{backgroundColor:'#ADD8E6'});
 		var game = js.game;
 		var system = js.system;
