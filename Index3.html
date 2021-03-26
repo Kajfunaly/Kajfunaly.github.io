@@ -26,7 +26,7 @@
             var precision = firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.precision');
             var address = firstGeoObject.properties.get('text');
             var AddressNameFull = res.metaData.geocoder.request;
-            newDiv.innerHTML=coords[0]+'\t'+coords[1]+'\t'+precision+'\t'+address+'\n';
+            newDiv.innerHTML='{"Addr":"'+coords[0]+'\t'+coords[1]+'\t'+precision+'\t'+address+'\n'+'"}';
              my_div = document.getElementById("map");
             document.body.insertBefore(newDiv, my_div);
 
