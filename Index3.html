@@ -5,14 +5,16 @@
     <title>Поиск координат Yandex</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=en_RU&amp;apikey=96642bc2-722f-46cf-a265-513f9dc1318e" type="text/javascript"></script>
-    <script type="text/javascript">
-        
-        function init2() {
+    <script>
+    ymaps.ready(init2);
+     
+     function init2() {
     var myMap = new ymaps.Map('map', {
         center: [55.753994, 37.622093],
         zoom: 9
     });
-    var readyData = document.getElementById("readyData");
+    var newDiv = document.createElement("div");
+    var my_div;
     var AddrStr=window.location.search.split('?')[1] || ''
     console.log(AddrStr);
 
@@ -24,45 +26,18 @@
             var precision = firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.precision');
             var address = firstGeoObject.properties.get('text');
             var AddressNameFull = res.metaData.geocoder.request;
-            readyData.textContent=coords[0]+'\t'+coords[1]+'\t'+precision+'\t'+address+'\n';
-            //arr.push([AddressNameFull,coords[0]+'\t'+coords[1]+'\t'+precision+'\t'+address]);
-            //console.log('4444'+rowNr, o["RowText"]);
+            newDiv.innerHTML=coords[0]+'\t'+coords[1]+'\t'+precision+'\t'+address+'\n';
+             my_div = document.getElementById("map");
+            document.body.insertBefore(newDiv, my_div);
+
         });
 
 }
 
-        function getGeo(){
-            ymaps.ready(init);
-        }
+</script>
 
-
-
-
-    </script>
-    <style>
-      .row {
-        display: inline-block;
-        vertical-align: top;
-      }
-    </style>
   </head>
   <body>
     <div id="map"></div>
-    <div class="row">
-      <p>Вставьте сюда данные c заголовками из excel (sql):</p>
-      <textarea id="excel_data" style="width:800px;height:500px;"></textarea><br>
-      <input type="button" onclick="javascript:getGeo()" value="Получить Yandex координаты"/>
-    </div>
-    <div class="row">
-      <p><span id="readyData">0</span></p>
-      <textarea id="GeoResult" style="width:1000px;height:500px;"></textarea>
-      <div id=></div>
-    </div>
-    <script type="text/javascript">
-      ymaps.ready(init2);
-
-    </script>
-    
-
   </body>
 </html>
